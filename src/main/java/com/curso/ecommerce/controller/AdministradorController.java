@@ -20,16 +20,15 @@ import com.curso.ecommerce.service.ProductoService;
 @Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
-
 	@Autowired
 	private ProductoService productoService;
-	
-	@Autowired(required=true)
+
+	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	@Autowired
 	private IOrdenService ordensService;
-	
+
 	private Logger logg= LoggerFactory.getLogger(AdministradorController.class);
 
 	@GetMapping("")
@@ -41,28 +40,26 @@ public class AdministradorController {
 
 		return "administrador/home";
 	}
-	
+
 	@GetMapping("/usuarios")
 	public String usuarios(Model model) {
 		model.addAttribute("usuarios", usuarioService.findAll());
 		return "administrador/usuarios";
 	}
-	
+
 	@GetMapping("/ordenes")
 	public String ordenes(Model model) {
 		model.addAttribute("ordenes", ordensService.findAll());
 		return "administrador/ordenes";
 	}
-	
+
 	@GetMapping("/detalle/{id}")
 	public String detalle(Model model, @PathVariable Integer id) {
 		logg.info("Id de la orden {}",id);
 		Orden orden= ordensService.findById(id).get();
-		
+
 		model.addAttribute("detalles", orden.getDetalle());
-		
+
 		return "administrador/detalleorden";
 	}
-	
-	
 }

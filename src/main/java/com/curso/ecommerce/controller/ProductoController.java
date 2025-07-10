@@ -61,8 +61,6 @@ public class ProductoController {
         if (producto.getId()==null) { // cuando se crea un producto
             String nombreImagen= upload.saveImage(file);
             producto.setImagen(nombreImagen);
-        }else {
-
         }
 
         productoService.save(producto);
