@@ -24,7 +24,7 @@ public class AdministradorController {
 	@Autowired
 	private ProductoService productoService;
 	
-	@Autowired
+	@Autowired(required=true)
 	private IUsuarioService usuarioService;
 	
 	@Autowired
