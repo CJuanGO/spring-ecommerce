@@ -1,76 +1,104 @@
 package com.curso.ecommerce.model;
 
 import java.util.Date;
+import java.util.List;
+import jakarta.persistence.*;
 
+
+@Entity
+@Table(name = "ordenes")
 public class Orden {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String numero;
+	private Date fechaCreacion;
+	private Date fechaRecibida;
 
-    private Integer id;
-    private String numero;
-    private Date fechaCreacion;
-    private Date fechaRecibida;
-    private Double total;
+	private double total;
+	
+	@ManyToOne
+	private Usuario usuario;
+	
+	@OneToMany(mappedBy = "orden")
+	private List<DetalleOrden> detalle;
+	
+	public Orden() {
+	
+	}
 
+	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaRecibida = fechaRecibida;
+		this.total = total;
+	}
 
-    public Orden() {
+	public Integer getId() {
+		return id;
+	}
 
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Orden(Integer id, String numero, Date fechaCreacion, Double total, Date fechaRecibida) {
-        this.id = id;
-        this.numero = numero;
-        this.fechaCreacion = fechaCreacion;
-        this.total = total;
-        this.fechaRecibida = fechaRecibida;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
 
-    public String getNumero() {
-        return numero;
-    }
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+	public Date getFechaRecibida() {
+		return fechaRecibida;
+	}
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
+	public void setFechaRecibida(Date fechaRecibida) {
+		this.fechaRecibida = fechaRecibida;
+	}
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
+	public double getTotal() {
+		return total;
+	}
 
-    public Date getFechaRecibida() {
-        return fechaRecibida;
-    }
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	
 
-    public void setFechaRecibida(Date fechaRecibida) {
-        this.fechaRecibida = fechaRecibida;
-    }
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-    public Double getTotal() {
-        return total;
-    }
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 
-    public void setTotal(Double total) {
-        this.total = total;
-    }
+	public List<DetalleOrden> getDetalle() {
+		return detalle;
+	}
 
-    @Override
-    public String toString() {
-        return "Orden{" +
-                "id=" + id +
-                ", numero='" + numero + '\'' +
-                ", fechaCreacion=" + fechaCreacion +
-                ", fechaRecibida=" + fechaRecibida +
-                ", total=" + total +
-                '}';
-    }
+	public void setDetalle(List<DetalleOrden> detalle) {
+		this.detalle = detalle;
+	}
+
+	@Override
+	public String toString() {
+		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
+				+ fechaRecibida + ", total=" + total + "]";
+	}
+	
+
 }
